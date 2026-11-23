@@ -76,8 +76,8 @@ Read our full [PRIVACY.md](PRIVACY.md) policy.
 ## Offline Prayer Calculation Engine
 
 Salah employs a **dual-engine architecture** for resilient operation anywhere on Earth:
-1. **Online Sync:** Connects to the public AlAdhan HTTPS API to fetch monthly tables and caches them locally for 24 hours.
-2. **On-Device Astronomical Fallback:** If internet access is unavailable or offline mode is active, the embedded **Batoul Apps Adhan** Kotlin library calculates exact prayer timings directly on your device CPU.
+1. **Online Sync:** Connects to the public AlAdhan HTTPS API (`api.aladhan.com`) to fetch monthly tables and caches them locally for 24 hours. The request transmits only selected coordinates and calculation preferences over encrypted HTTPS (IP addresses are processed by network routing and remote hosting infrastructure as standard for internet traffic).
+2. **On-Device Astronomical Fallback:** If internet access is unavailable or offline mode is active, the embedded **Batoul Apps Adhan** Kotlin library calculates exact prayer timings directly on your device CPU with zero network transmission.
 
 The application functions 100% reliably in airplane mode, remote locations, and areas with restricted internet access.
 

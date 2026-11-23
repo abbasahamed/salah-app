@@ -57,3 +57,4 @@ The project adopted the **Apache License, Version 2.0**.
 - **Zero GPL / copyleft dependencies** exist in the runtime classpath.
 
 **Conclusion:** All bundled software, fonts, and assets permit open-source redistribution.
+

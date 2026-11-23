@@ -63,3 +63,4 @@
   - Pinned third-party actions to full immutable commit SHAs.
   - Zero access to signing secrets or publishing credentials.
 - **Verification:** Validated GitHub Actions workflow syntax.
+

@@ -127,3 +127,4 @@ Full inventory documented in [docs/open-source-dependency-license-inventory.md](
    git push -u origin main
    ```
 2. **Draft GitHub Release:** Authorize drafting release `v1.0.0` with `Salah-v1.0.0-universal.apk` and its SHA-256 checksum.
+
