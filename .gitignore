@@ -61,3 +61,10 @@ test_screen*.png
 checkpoints/
 *.zip
 release-dist/
+
+# Development artifacts and skills
+screenshots/
+playstore/
+.agents/
+skills-lock.json
+

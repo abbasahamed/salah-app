@@ -1,150 +1,185 @@
-# Salah (صلاة) — Elegant, Privacy-First Islamic Prayer Companion for Android
+# Salah
 
-[![Platform](https://img.shields.io/badge/Platform-Android-3DDC84?logo=android&logoColor=white)](https://www.android.com/)
-[![Android Min SDK](https://img.shields.io/badge/Min%20SDK-23%20(Android%206.0)-informational)](https://developer.android.com)
-[![Target SDK](https://img.shields.io/badge/Target%20SDK-35%20(Android%2015)-informational)](https://developer.android.com)
-[![Zero Sign-In](https://img.shields.io/badge/Accounts-Zero%20Sign--In-brightgreen)](#zero-accounts--zero-tracking)
-[![Offline First](https://img.shields.io/badge/Offline-100%25%20Capable-blue)](#offline-prayer-calculation-engine)
+A privacy-conscious, open-source Android prayer companion.
 
-Salah is a free, modern, and completely privacy-respecting native Android application for Islamic prayer times, Hijri calendar schedules, and Qibla direction.
-
-Built from the ground up with **Kotlin** and **Jetpack Compose**, Salah pairs deterministic astronomical calculations with a bespoke **Editorial Luxury** interface designed for clarity, reverence, and daily peace of mind.
+[![Build & Verify](https://github.com/abbasahamed/salah-app/actions/workflows/ci.yml/badge.svg)](https://github.com/abbasahamed/salah-app/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/abbasahamed/salah-app?include_prereleases&style=flat-square&color=C5A880)](https://github.com/abbasahamed/salah-app/releases/latest)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat-square)](LICENSE)
+[![Platform](https://img.shields.io/badge/Platform-Android%206.0%2B-3DDC84?style=flat-square&logo=android&logoColor=white)](https://www.android.com/)
+[![No Accounts](https://img.shields.io/badge/Accounts-Zero%20Sign--In-brightgreen?style=flat-square)](#privacy)
 
 ---
 
-## Visual Showcase
+## Overview
 
-| Today (Dark Theme) | Today (Light Theme) | Calendar (Dark Theme) | Calendar (Light Theme) |
-| :---: | :---: | :---: | :---: |
-| <img src="screenshots/salah-milestone-8.1/01_today_dark_verified.png" width="220" /> | <img src="screenshots/salah-milestone-8.1/02_today_light_verified.png" width="220" /> | <img src="screenshots/salah-milestone-8.1/03_calendar_dark_verified.png" width="220" /> | <img src="screenshots/salah-milestone-8.1/04_calendar_light_verified.png" width="220" /> |
+Salah is a standalone native Android application providing accurate Islamic prayer times, an interactive Gregorian and Hijri calendar, sensor-driven Qibla direction, and Android home-screen widgets.
 
-| Qibla Compass | Settings (Appearance & Method) | Location Search | Home Screen Widgets |
-| :---: | :---: | :---: | :---: |
-| <img src="screenshots/salah-milestone-8.1/06_qibla_dark_verified.png" width="220" /> | <img src="screenshots/salah-milestone-8.1/09_settings_dark_verified.png" width="220" /> | <img src="screenshots/salah-milestone-8.1/11_location_verified.png" width="220" /> | <img src="screenshots/salah-milestone-8.1/21_both_widgets_verified.png" width="220" /> |
-
----
-
-## Key Features
-
-### 1. Today Prayer Dashboard
-- **Hero Countdown:** Live countdown displaying the exact hours, minutes, and seconds remaining until the next prayer.
-- **Next Prayer Card:** Highlights the upcoming prayer with time and civil date context.
-- **Complete Timetable:** Clear schedules for all six daily markers: **Fajr**, **Sunrise**, **Dhuhr**, **Asr**, **Maghrib**, and **Isha**.
-- **Midnight & After-Isha Rollover:** Seamlessly advances to "Tomorrow's Fajr" after Isha without confusing negative countdowns.
-
-### 2. Sensor-Driven Qibla Compass
-- **True North & Sensor Fusion:** Computes Kaaba bearing using spherical trigonometry, geomagnetic field measurements, and geomagnetic declination.
-- **Haptic Feedback:** Gentle haptic confirmation when device aligns directly with the Qibla.
-- **Sensor Calibration Banner:** Warns when device magnetometers require calibration (figure-eight motion) and gracefully handles devices lacking magnetic sensors.
-
-### 3. Hijri & Gregorian Calendar
-- **Full Monthly Schedules:** Navigate any past or future month with synchronized Gregorian and Islamic Hijri dates.
-- **Date Inspection:** Tap any date to inspect its six prayer timings instantly.
-- **Isha Clearance:** Intelligent content padding ensures bottom navigation docks never obscure prayer cards.
-
-### 4. Jetpack Glance Home Screen Widgets
-- **2×2 Next Prayer Widget:** Compact glanceable widget featuring next prayer name, time, and live countdown timer.
-- **4×2 Daily Timetable Widget:** Expanded widget displaying the entire daily timetable directly on your home screen launcher.
-
-### 5. Calculation Customization
-- **Major Calculation Authorities:**
-  - University of Islamic Sciences, Karachi
-  - Islamic Society of North America (ISNA)
-  - Muslim World League (MWL)
-  - Umm al-Qura University, Makkah
-- **Asr Juristic Conventions:** Standard (Shafi'i, Maliki, Hanbali) and Hanafi shadow ratios.
-- **High-Latitude Rules:** Angle-based calculations and midnight rules for polar and sub-polar latitudes.
-- **Manual Minute Adjustments:** Fine-tune individual prayer times from −60 to +60 minutes.
-- **Time Format:** 12-hour (AM/PM) or 24-hour display toggle.
+The project is built with Kotlin and Jetpack Compose around three core architectural tenets:
+1. **Unconditional Privacy:** Zero accounts, zero registration, zero advertising, zero analytics SDKs, and zero telemetry.
+2. **Offline-First Resilience:** Astronomical calculations, a global database of over 30,000 cities, and timezone spatial lookup operate directly on-device with zero network connectivity.
+3. **Refined Native Design:** A bespoke editorial interface featuring Geist typography, purposeful micro-interactions, squarish calendar selections, custom prayer vectors, and balanced light and dark palettes.
 
 ---
 
-## Zero Accounts & Zero Tracking
+## Screenshots
 
-Salah is built on strict privacy principles:
-- **No Sign-In:** No accounts, passwords, or emails.
-- **No Analytics:** Zero tracking SDKs (no Firebase, Google Analytics, Mixpanel, or telemetry).
-- **No Ads:** Absolutely zero advertising or monetized data brokers.
-- **No Continuous Location:** Automatic location queries GPS **only once in the foreground** when requested.
-- **Offline Search:** Search thousands of global cities without granting location permissions.
-- **Local Data Only:** Stored in local Room SQLite tables and Android DataStore. Cloud backups are explicitly disabled (`android:allowBackup="false"`).
+| Today (Dark) | Today (Light) | Calendar |
+| :---: | :---: | :---: |
+| <img src="assets/screenshots/today-dark.png" width="230" alt="Today Screen Dark Theme" /> | <img src="assets/screenshots/today-light.png" width="230" alt="Today Screen Light Theme" /> | <img src="assets/screenshots/calendar.png" width="230" alt="Calendar Screen" /> |
 
-Read our full [PRIVACY.md](PRIVACY.md) policy.
+| Qibla Compass | Settings | Home Screen Widgets |
+| :---: | :---: | :---: |
+| <img src="assets/screenshots/qibla.png" width="230" alt="Qibla Compass" /> | <img src="assets/screenshots/settings.png" width="230" alt="Settings Screen" /> | <img src="assets/screenshots/widgets.png" width="230" alt="Android Glance Widgets" /> |
 
 ---
 
-## Offline Prayer Calculation Engine
+## Features
 
-Salah employs a **dual-engine architecture** for resilient operation anywhere on Earth:
-1. **Online Sync:** Connects to the public AlAdhan HTTPS API (`api.aladhan.com`) to fetch monthly tables and caches them locally for 24 hours. The request transmits only selected coordinates and calculation preferences over encrypted HTTPS (IP addresses are processed by network routing and remote hosting infrastructure as standard for internet traffic).
-2. **On-Device Astronomical Fallback:** If internet access is unavailable or offline mode is active, the embedded **Batoul Apps Adhan** Kotlin library calculates exact prayer timings directly on your device CPU with zero network transmission.
-
-The application functions 100% reliably in airplane mode, remote locations, and areas with restricted internet access.
-
----
-
-## System Requirements
-
-- **Operating System:** Android 6.0 (Marshmallow, API level 23) or higher.
-- **Target OS:** Android 15 (Vanilla Ice Cream, API level 35).
-- **Architecture:** `arm64-v8a`, `armeabi-v7a`, `x86_64`.
-- **Sensors:** Accelerometer and magnetometer required for the Qibla compass (prayer times work without sensors).
+- **Accurate Daily Timetable:** Displays exact times for Fajr, Sunrise, Dhuhr, Asr, Maghrib, and Isha with live countdown hero display and next-prayer indicators.
+- **Dual Calculation Architecture:** Automatic online sync with AlAdhan API over HTTPS with resilient on-device fallback (Batoul Apps Adhan) requiring zero network access.
+- **Offline Location Database:** Instant global city search powered by an embedded, compressed database of over 30,000 cities with precomputed coordinates and civil timezones.
+- **Privacy-Preserving GPS:** User-controlled, foreground-only location detection without background tracking, continuous polling, or history logging.
+- **Interactive Gregorian & Hijri Calendar:** Monthly prayer schedule navigation with synchronized Gregorian and Islamic Hijri dates.
+- **Sensor-Driven Qibla Compass:** Smooth Kaaba bearing calculation utilizing device rotation vector sensor fusion, geomagnetic declination correction, and haptic feedback upon alignment.
+- **Jetpack Glance Widgets:** 
+  - `2×2 Next Prayer Widget` — Compact glanceable widget featuring next prayer name, time, and live countdown timer.
+  - `4×2 Daily Timetable Widget` — Expanded widget displaying the full daily timetable on your home screen.
+- **Calculation Preferences:** Customization for major calculation methods (Karachi, ISNA, Muslim World League, Umm al-Qura, Egypt, Tehran, Gulf, Kuwait, Qatar, Singapore), Hanafi/Standard Asr juristic conventions, high-latitude adaptations, and ±60 minute manual offsets.
+- **Theme Selection:** Graphite (dark) and Warm Porcelain (light) themes with custom prayer vector iconography.
 
 ---
 
-## Installation & Sideloading
+## Download
 
-Because Salah is distributed directly via GitHub Releases rather than Google Play, you install it via standard Android sideloading:
+Official signed releases are distributed exclusively through GitHub Releases:
 
-1. Go to the [Releases](https://github.com/abbasahamed/salah-app/releases) page.
-2. Download the latest `Salah-vX.Y.Z-universal.apk`.
-3. Open the downloaded APK on your Android device.
-4. If prompted with *"Install unknown apps"*, allow your browser or file manager permission to install the application.
-5. Tap **Install** and open Salah. No registration or account setup is needed!
+- **Latest Release:** [GitHub Releases](https://github.com/abbasahamed/salah-app/releases/latest)
+- **Universal Release APK:** [`Salah-v1.0.0-universal.apk`](https://github.com/abbasahamed/salah-app/releases/download/v1.0.0/Salah-v1.0.0-universal.apk)
+- **SHA-256 Checksum:** `382ac0e55a01db3c313631e2bf8b41b8f25ea374e54a584a750f8923a7e3e731`
+
+> [!IMPORTANT]
+> Verify that the SHA-256 checksum of your downloaded APK matches the published checksum file before installation. Only download releases from this official repository.
 
 ---
 
-## Building from Source
+## Requirements
+
+- **Android Version:** Android 6.0 (Marshmallow, API 23) or higher.
+- **Target SDK:** Android 15 (API 35).
+- **Supported ABIs:** `arm64-v8a`, `armeabi-v7a`, `x86_64`.
+- **Sensors:** Accelerometer and magnetometer (or rotation vector sensor) are required for the Qibla compass. Prayer times and calendar work independently of hardware sensors.
+
+---
+
+## Installation
+
+Salah is distributed directly as an Android Package (APK):
+
+1. Download the latest `Salah-vX.Y.Z-universal.apk` from [Releases](https://github.com/abbasahamed/salah-app/releases).
+2. Open the downloaded APK on your Android device.
+3. If prompted by Android, grant permission to install from your browser or file manager.
+4. Review the requested permissions (Foreground Location is optional; no network permissions are required for offline use).
+5. Open Salah. No sign-in or registration is required.
+
+---
+
+## Privacy
+
+Salah operates with a strict, verifiable privacy model:
+
+- **No Remote User Accounts:** The application has no sign-in screens, password fields, or cloud user profiles.
+- **No Analytics or Telemetry:** No tracking libraries (such as Firebase Analytics, Mixpanel, or Google Analytics) are included in the source code.
+- **Online vs. Offline Calculation:** When online sync is enabled, HTTP queries to AlAdhan transmit selected coordinates over encrypted HTTPS. Standard IP metadata is processed by intermediate network routing infrastructure. When operating offline or using city search, zero network traffic is generated.
+- **No Cloud Backup Leakage:** Android cloud backups are explicitly disabled (`android:allowBackup="false"`).
+
+Read our complete policy in [PRIVACY.md](PRIVACY.md).
+
+---
+
+## Build from Source
 
 ### Prerequisites
-- JDK 17 or JDK 21
-- Android SDK Platform 35 & Build Tools 35.0.0
-- Gradle (provided via `./gradlew`)
 
-### Build Commands
-```sh
-# Clone repository
+- **JDK:** Java Development Kit 21 (Temurin, OpenJDK, or Android Studio bundled JBR 21).
+- **Android SDK:** Platform API 35 with Build-Tools 35.0.0.
+- **Android Studio:** Ladybug (2024.2.1) or newer recommended.
+
+### Building
+
+```bash
+# Clone the repository
 git clone https://github.com/abbasahamed/salah-app.git
 cd salah-app
 
-# Compile and package Debug APK
+# Build debug APK
 ./gradlew assembleDebug
 
-# Run JVM Unit Tests (255 tests)
+# Output APK: app/build/outputs/apk/debug/app-debug.apk
+```
+
+### Running Tests
+
+```bash
+# Run JVM Unit Tests
 ./gradlew testDebugUnitTest
 
 # Run Android Lint
 ./gradlew lintDebug
 
-# Run UI Instrumentation Tests (requires emulator or device)
+# Run UI Instrumentation Tests (requires connected emulator or device)
 ./gradlew connectedDebugAndroidTest
 ```
+
+For complete development setup details, see the [Development Setup Guide](docs/development/setup.md) and [Testing Guide](docs/development/testing.md).
+
+---
+
+## Project Architecture
+
+Salah is structured as a multi-module Android project:
+
+```text
+├── app/                  # Application UI, Navigation, ViewModels, Glance AppWidgets
+├── core/
+│   ├── designsystem/     # Design tokens, typography, colors, and SalahIcons
+│   ├── location/         # Offline cities database, spatial timezone index, GPS provider
+│   ├── prayer/           # Astronomical prayer engine, AlAdhan client, calculation rules
+│   └── preferences/      # AndroidX DataStore preference storage
+├── docs/                 # Architecture, development, and security documentation
+└── tools/                # Geographic offline asset preprocessing utilities
+```
+
+For in-depth architectural specifications:
+- [Architecture Overview](docs/architecture/overview.md)
+- [Prayer Times & Calculation Engine](docs/architecture/prayer-times.md)
+- [Location & Privacy Architecture](docs/architecture/location-and-privacy.md)
+- [Qibla Compass & Sensor Fusion](docs/architecture/qibla.md)
+- [Home Screen Widgets](docs/architecture/widgets.md)
 
 ---
 
 ## Contributing
 
-We welcome community bug reports, enhancements, and translations! Please read our [CONTRIBUTING.md](CONTRIBUTING.md) guide and [SECURITY.md](SECURITY.md) policy before submitting pull requests.
+We welcome contributions! Please review [CONTRIBUTING.md](CONTRIBUTING.md) for our pull request process, coding standards, and architectural tenets. Automated agents and contributors should also review [AGENTS.md](AGENTS.md).
 
 ---
 
-## Known Limitations
+## Security
 
-- **Compass Sensor Interference:** In environments with strong electromagnetic fields (near laptops, steel structures, or magnetic phone cases), the Qibla compass needle may fluctuate. Wave your phone in a figure-eight pattern to calibrate.
-- **Polar Latitudes:** In extreme northern or southern latitudes during summer/winter solstice periods where astronomical twilight or sunrise/sunset does not occur, calculations use high-latitude angle approximations.
+Security policies, supported versions, and responsible vulnerability disclosure instructions are detailed in [SECURITY.md](SECURITY.md). The application's security model is documented in [Security Model](docs/security/security-model.md).
 
 ---
 
 ## License
 
-Salah is open-source software licensed under your choice of either the **Apache License, Version 2.0** or the **MIT License**. See [LICENSE](LICENSE) for terms.
+Salah is open-source software licensed under the **Apache License, Version 2.0**. See the [LICENSE](LICENSE) file for complete license text.
+
+---
+
+## Acknowledgments
+
+- [Adhan Kotlin](https://github.com/batoulapps/adhan-kotlin) by Batoul Apps — Offline astronomical prayer calculation engine.
+- [AlAdhan API](https://aladhan.com/) by MajorDoMo — Online Islamic prayer timetable API.
+- [GeoNames](https://www.geonames.org/) — Global geographic city datasets (Creative Commons Attribution 4.0 License).
+- [Timezone Boundary Builder](https://github.com/evansiroky/timezone-boundary-builder) by Evan Siroky — Open-source timezone shapefiles.
+- [Geist Font Family](https://vercel.com/font) by Vercel — Open-source variable sans-serif typeface (SIL Open Font License 1.1).

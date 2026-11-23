@@ -1,7 +1,7 @@
 """Build offline assets from the documented GeoNames and TBB downloads.
 
 Usage: python3 tools/build_location_assets.py SOURCE_DIRECTORY
-Requires Shapely 2.x. See docs/milestone-3.md for inputs and attribution.
+Requires Shapely 2.x. See docs/architecture/location-and-privacy.md for inputs and attribution.
 """
 import csv
 import gzip
