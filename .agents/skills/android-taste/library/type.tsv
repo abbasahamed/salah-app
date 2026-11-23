@@ -1,0 +1,15 @@
+# name	kinds	display_font	body_font	numerals	note
+plex-ledger	finance,utility	IBM Plex Sans	IBM Plex Sans	IBM Plex Mono for figures	engineered and exact; mono for amounts and codes
+jakarta-clean	finance,productivity,social	Plus Jakarta Sans	Plus Jakarta Sans	tabular figures (tnum)	friendly geometric; one family, weight contrast does the work
+manrope-inter	finance,utility,productivity	Manrope	Inter	tabular figures (tnum)	tight modern display over a neutral workhorse body
+grotesk-inter	utility,game,productivity	Space Grotesk	Inter	tabular figures (tnum)	quirky technical display, calm body
+sora-inter	game,utility	Sora	Inter	tabular figures (tnum)	wide and futuristic display; keep headlines short
+dmsans-solo	health,education	DM Sans	DM Sans	tabular figures (tnum)	soft, approachable, low contrast; good for wellbeing
+lexend-solo	health,education	Lexend	Lexend	tabular figures (tnum)	designed for reading ease; good for dense learning content
+figtree-solo	health,social,commerce	Figtree	Figtree	tabular figures (tnum)	friendly and neutral, strong at small sizes
+bricolage-dmsans	media,social,commerce	Bricolage Grotesque	DM Sans	tabular figures (tnum)	characterful display for brand moments; body stays quiet
+fraunces-inter	media,travel,commerce	Fraunces	Inter	tabular figures (tnum)	soft serif display with warmth; use only for display and headline
+newsreader-source	education,media	Newsreader	Source Sans 3	tabular figures (tnum)	editorial reading feel; good for long-form content
+instrument-inter	media,travel	Instrument Serif	Inter	tabular figures (tnum)	single-weight serif display for large titles only; do not use below 28sp
+outfit-nunito	education,game	Outfit	Nunito	tabular figures (tnum)	rounded and playful without going childish
+rubik-solo	game,commerce	Rubik	Rubik	tabular figures (tnum)	slightly rounded, punchy; works for badges and prices

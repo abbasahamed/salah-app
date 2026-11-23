@@ -1,0 +1,6 @@
+# name	kinds	xs	s	m	l	xl	note
+crisp	finance,utility,productivity	2	4	6	8	12	precise, dense, tool-like
+soft	health,education,social,travel	4	8	12	16	28	the Material 3 default scale; safe and friendly
+round	game,social,commerce,education	8	12	16	24	32	generous radii, toy-like and warm
+pill	media,game,social	12	16	24	28	50	capsule-forward; buttons and chips fully round, cards stay 24dp
+mixed	media,travel,commerce,productivity	0	4	12	20	28	sharp small elements, soft large surfaces for contrast

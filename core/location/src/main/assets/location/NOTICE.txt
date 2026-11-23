@@ -1,0 +1,12 @@
+City names, coordinates, administrative areas, countries and time zones:
+GeoNames, https://www.geonames.org/
+Creative Commons Attribution 4.0 International, https://creativecommons.org/licenses/by/4.0/
+Salah packages selected, reformatted fields from cities15000 and checks cities500 for Kattankulathur.
+The supplemental Kattankulathur point, when included, represents the SRM IST campus:
+https://webstor.srmist.edu.in/web_assets/downloads/2025/resonance-newsletter-volume4-issue2.pdf
+
+Time zone boundary data: © OpenStreetMap contributors, https://www.openstreetmap.org/copyright
+Processed by Evan Siroky and contributors, Timezone Boundary Builder v2026f, https://github.com/evansiroky/timezone-boundary-builder
+Salah simplifies and re-encodes the land 1970-comprehensive release into timezones.bin.gzip.
+The derived database timezones.bin.gzip is distributed under the Open Database License v1.0.
+A complete copy of that database accompanies this notice. See ODbL.txt for the license.

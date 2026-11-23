@@ -1,0 +1,32 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp" android:height="48dp"
+    android:viewportWidth="48" android:viewportHeight="48">
+    <!-- Graphite background -->
+    <path android:fillColor="#0F1012"
+        android:pathData="M24,0 A24,24 0,1 1,24 48 A24,24 0,1 1,24 0"/>
+    <!-- Champagne circular halo -->
+    <path
+        android:strokeColor="#C5A880"
+        android:strokeWidth="1.6"
+        android:strokeAlpha="0.75"
+        android:fillColor="#00000000"
+        android:pathData="M24,10 A14,14 0,1,1 23.99,10 Z"/>
+    <!-- Outer arch / mihrab -->
+    <path
+        android:strokeColor="#DFCBA8"
+        android:strokeWidth="1.5"
+        android:fillColor="#00000000"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M16,36 L16,24 C16,18 24,13 24,13 C24,13 32,18 32,24 L32,36"/>
+    <!-- Rising Sun -->
+    <path
+        android:fillColor="#DFCBA8"
+        android:pathData="M20.5,31 A3.5,3.5 0,0,1 27.5,31 Z"/>
+    <!-- Horizon baseline -->
+    <path
+        android:strokeColor="#DFCBA8"
+        android:strokeWidth="1.2"
+        android:strokeLineCap="round"
+        android:pathData="M19,31 L29,31"/>
+</vector>
