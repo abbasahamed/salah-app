@@ -420,35 +420,120 @@ internal fun SalahApp(
                             val selectedSite = todaySelection.value?.prayerLocation()
                             val heroVariant = if (scenario == "hero_variant_a") HeroSurfaceVariant.TONAL_CARD else HeroSurfaceVariant.CARDLESS
 
-                            val overrideSchedule = if ((scenario == "today_long_city" || scenario == "today_gps") && state.daily == null) {
-                                val loc = todaySelection.value!!
-                                val date = java.time.LocalDate.now(loc.zone)
-                                val req = com.salah.prayer.PrayerCalculationRequest(
-                                    location = loc.prayerLocation(),
-                                    date = date,
-                                    method = com.salah.prayer.PrayerCalculationMethod.KARACHI,
-                                    asr = com.salah.prayer.AsrJuristicMethod.STANDARD,
-                                )
-                                val timings = listOf(
-                                    date.atTime(5, 12).atZone(loc.zone).toInstant(),
-                                    date.atTime(6, 25).atZone(loc.zone).toInstant(),
-                                    date.atTime(12, 18).atZone(loc.zone).toInstant(),
-                                    date.atTime(15, 38).atZone(loc.zone).toInstant(),
-                                    date.atTime(18, 8).atZone(loc.zone).toInstant(),
-                                    date.atTime(19, 24).atZone(loc.zone).toInstant(),
-                                )
-                                val schedule = com.salah.prayer.DailyPrayerSchedule(req, timings)
-                                TodayState(
-                                    date = date,
-                                    daily = com.salah.prayer.PrayerScheduleResult.Available(schedule, com.salah.prayer.PrayerTimeSource.LOCAL_CACHE),
-                                    next = com.salah.prayer.NextPrayer(
-                                        time = schedule.timings[2],
-                                        remaining = java.time.Duration.ofHours(3).plusMinutes(24),
-                                    ),
-                                    preceding = schedule.timings[1],
-                                    site = loc.prayerLocation(),
-                                )
-                            } else null
+                            val overrideSchedule = when (scenario) {
+                                "today_long_city", "today_gps" -> if (state.daily == null) {
+                                    val loc = todaySelection.value!!
+                                    val date = java.time.LocalDate.now(loc.zone)
+                                    val req = com.salah.prayer.PrayerCalculationRequest(
+                                        location = loc.prayerLocation(),
+                                        date = date,
+                                        method = com.salah.prayer.PrayerCalculationMethod.KARACHI,
+                                        asr = com.salah.prayer.AsrJuristicMethod.STANDARD,
+                                    )
+                                    val timings = listOf(
+                                        date.atTime(5, 12).atZone(loc.zone).toInstant(),
+                                        date.atTime(6, 25).atZone(loc.zone).toInstant(),
+                                        date.atTime(12, 18).atZone(loc.zone).toInstant(),
+                                        date.atTime(15, 38).atZone(loc.zone).toInstant(),
+                                        date.atTime(18, 8).atZone(loc.zone).toInstant(),
+                                        date.atTime(19, 24).atZone(loc.zone).toInstant(),
+                                    )
+                                    val schedule = com.salah.prayer.DailyPrayerSchedule(req, timings)
+                                    TodayState(
+                                        date = date,
+                                        daily = com.salah.prayer.PrayerScheduleResult.Available(schedule, com.salah.prayer.PrayerTimeSource.LOCAL_CACHE),
+                                        next = com.salah.prayer.NextPrayer(
+                                            time = schedule.timings[2],
+                                            remaining = java.time.Duration.ofHours(3).plusMinutes(24),
+                                        ),
+                                        preceding = schedule.timings[1],
+                                        site = loc.prayerLocation(),
+                                    )
+                                } else null
+                                "today_offline" -> {
+                                    val loc = todaySelection.value ?: com.salah.location.SalahLocation(
+                                        id = "mock-offline",
+                                        coordinates = com.salah.location.LocationCoordinates(12.820254, 80.037819),
+                                        names = com.salah.location.PlaceNames("Kattankulathur", "Tamil Nadu", "India"),
+                                        zone = java.time.ZoneId.of("Asia/Kolkata"),
+                                        mode = com.salah.location.LocationMode.MANUAL,
+                                    )
+                                    val date = java.time.LocalDate.now(loc.zone)
+                                    val req = com.salah.prayer.PrayerCalculationRequest(
+                                        location = loc.prayerLocation(),
+                                        date = date,
+                                        method = com.salah.prayer.PrayerCalculationMethod.KARACHI,
+                                        asr = com.salah.prayer.AsrJuristicMethod.STANDARD,
+                                    )
+                                    val timings = listOf(
+                                        date.atTime(5, 12).atZone(loc.zone).toInstant(),
+                                        date.atTime(6, 25).atZone(loc.zone).toInstant(),
+                                        date.atTime(12, 18).atZone(loc.zone).toInstant(),
+                                        date.atTime(15, 38).atZone(loc.zone).toInstant(),
+                                        date.atTime(18, 8).atZone(loc.zone).toInstant(),
+                                        date.atTime(19, 24).atZone(loc.zone).toInstant(),
+                                    )
+                                    val schedule = com.salah.prayer.DailyPrayerSchedule(req, timings)
+                                    TodayState(
+                                        date = date,
+                                        daily = com.salah.prayer.PrayerScheduleResult.Available(schedule, com.salah.prayer.PrayerTimeSource.OFFLINE_CALCULATION),
+                                        next = com.salah.prayer.NextPrayer(
+                                            time = schedule.timings[2],
+                                            remaining = java.time.Duration.ofHours(2).plusMinutes(15),
+                                        ),
+                                        preceding = schedule.timings[1],
+                                        site = loc.prayerLocation(),
+                                    )
+                                }
+                                "today_after_isha" -> {
+                                    val loc = todaySelection.value ?: com.salah.location.SalahLocation(
+                                        id = "mock-isha",
+                                        coordinates = com.salah.location.LocationCoordinates(12.820254, 80.037819),
+                                        names = com.salah.location.PlaceNames("Kattankulathur", "Tamil Nadu", "India"),
+                                        zone = java.time.ZoneId.of("Asia/Kolkata"),
+                                        mode = com.salah.location.LocationMode.MANUAL,
+                                    )
+                                    val date = java.time.LocalDate.now(loc.zone)
+                                    val req = com.salah.prayer.PrayerCalculationRequest(
+                                        location = loc.prayerLocation(),
+                                        date = date,
+                                        method = com.salah.prayer.PrayerCalculationMethod.KARACHI,
+                                        asr = com.salah.prayer.AsrJuristicMethod.STANDARD,
+                                    )
+                                    val timings = listOf(
+                                        date.atTime(5, 12).atZone(loc.zone).toInstant(),
+                                        date.atTime(6, 25).atZone(loc.zone).toInstant(),
+                                        date.atTime(12, 18).atZone(loc.zone).toInstant(),
+                                        date.atTime(15, 38).atZone(loc.zone).toInstant(),
+                                        date.atTime(18, 8).atZone(loc.zone).toInstant(),
+                                        date.atTime(19, 24).atZone(loc.zone).toInstant(),
+                                    )
+                                    val todaySchedule = com.salah.prayer.DailyPrayerSchedule(req, timings)
+                                    val tomorrowDate = date.plusDays(1)
+                                    val tomorrowReq = req.copy(date = tomorrowDate)
+                                    val tomorrowTimings = listOf(
+                                        tomorrowDate.atTime(5, 13).atZone(loc.zone).toInstant(),
+                                        tomorrowDate.atTime(6, 26).atZone(loc.zone).toInstant(),
+                                        tomorrowDate.atTime(12, 18).atZone(loc.zone).toInstant(),
+                                        tomorrowDate.atTime(15, 38).atZone(loc.zone).toInstant(),
+                                        tomorrowDate.atTime(18, 8).atZone(loc.zone).toInstant(),
+                                        tomorrowDate.atTime(19, 24).atZone(loc.zone).toInstant(),
+                                    )
+                                    val tomorrowSchedule = com.salah.prayer.DailyPrayerSchedule(tomorrowReq, tomorrowTimings)
+                                    val tomorrowFajr = tomorrowSchedule.timings[0]
+                                    TodayState(
+                                        date = date,
+                                        daily = com.salah.prayer.PrayerScheduleResult.Available(todaySchedule, com.salah.prayer.PrayerTimeSource.LOCAL_CACHE),
+                                        next = com.salah.prayer.NextPrayer(
+                                            time = tomorrowFajr,
+                                            remaining = java.time.Duration.ofHours(7).plusMinutes(42),
+                                        ),
+                                        preceding = todaySchedule.timings.last(),
+                                        site = loc.prayerLocation(),
+                                    )
+                                }
+                                else -> null
+                            }
 
                             val todayState = overrideSchedule ?: if (scenario == "unavailable") {
                                 TodayState(
@@ -466,16 +551,56 @@ internal fun SalahApp(
                             )
                         }
                         composable(Destination.CALENDAR.route) {
+                            val calendarScenarioState = when (scenario) {
+                                "calendar_offline" -> {
+                                    val date = java.time.LocalDate.now()
+                                    val zone = java.time.ZoneId.of("Asia/Kolkata")
+                                    val loc = com.salah.prayer.PrayerLocation(12.820254, 80.037819, zone)
+                                    val req = com.salah.prayer.PrayerCalculationRequest(
+                                        location = loc,
+                                        date = date,
+                                        method = com.salah.prayer.PrayerCalculationMethod.KARACHI,
+                                        asr = com.salah.prayer.AsrJuristicMethod.STANDARD,
+                                    )
+                                    val timings = listOf(
+                                        date.atTime(5, 12).atZone(zone).toInstant(),
+                                        date.atTime(6, 25).atZone(zone).toInstant(),
+                                        date.atTime(12, 18).atZone(zone).toInstant(),
+                                        date.atTime(15, 38).atZone(zone).toInstant(),
+                                        date.atTime(18, 8).atZone(zone).toInstant(),
+                                        date.atTime(19, 24).atZone(zone).toInstant(),
+                                    )
+                                    val schedule = com.salah.prayer.DailyPrayerSchedule(req, timings)
+                                    val ym = java.time.YearMonth.from(date)
+                                    val monthData = com.salah.app.calendar.CalendarDateConverter.createMonthData(
+                                        yearMonth = ym,
+                                        selectedDate = date,
+                                        todayDate = date,
+                                    )
+                                    com.salah.app.calendar.CalendarUiState(
+                                        displayedMonth = ym,
+                                        selectedDate = date,
+                                        monthData = monthData,
+                                        scheduleState = com.salah.app.calendar.CalendarScheduleState.Success(schedule, com.salah.prayer.PrayerTimeSource.OFFLINE_CALCULATION),
+                                        hasLocation = true,
+                                        locationName = "Kattankulathur",
+                                        zone = zone,
+                                    )
+                                }
+                                else -> null
+                            }
                             if (calendar != null) {
                                 com.salah.app.calendar.CalendarScreen(
                                     viewModel = calendar,
                                     onOpenLocation = { openLocation(false) },
+                                    overrideState = calendarScenarioState,
                                 )
                             } else {
                                 val vm: com.salah.app.calendar.CalendarViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
                                 com.salah.app.calendar.CalendarScreen(
                                     viewModel = vm,
                                     onOpenLocation = { openLocation(false) },
+                                    overrideState = calendarScenarioState,
                                 )
                             }
                         }

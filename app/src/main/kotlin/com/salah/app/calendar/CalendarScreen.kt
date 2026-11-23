@@ -80,8 +80,10 @@ internal fun CalendarScreen(
     viewModel: CalendarViewModel,
     onOpenLocation: () -> Unit,
     modifier: Modifier = Modifier,
+    overrideState: CalendarUiState? = null,
 ) {
-    val state by viewModel.state.collectAsStateWithLifecycle()
+    val vmState by viewModel.state.collectAsStateWithLifecycle()
+    val state = overrideState ?: vmState
     val configuration = LocalConfiguration.current
     val locale = ConfigurationCompat.getLocales(configuration)[0] ?: Locale.getDefault()
     val density = LocalDensity.current
