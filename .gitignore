@@ -60,3 +60,4 @@ logcat*.txt
 test_screen*.png
 checkpoints/
 *.zip
+release-dist/

@@ -15,8 +15,27 @@ android {
         minSdk = 23
         targetSdk = 35
         versionCode = 1
-        versionName = "0.1.0"
+        versionName = "1.0.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+        create("release") {
+            val keystoreFile = file(System.getenv("SALAH_KEYSTORE_PATH") ?: "${System.getProperty("user.home")}/.salah-release-keys/salah-release.jks")
+            if (keystoreFile.exists()) {
+                storeFile = keystoreFile
+                storePassword = System.getenv("SALAH_STORE_PASSWORD") ?: "salah-release-2026"
+                keyAlias = System.getenv("SALAH_KEY_ALIAS") ?: "salah"
+                keyPassword = System.getenv("SALAH_KEY_PASSWORD") ?: "salah-release-2026"
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            isMinifyEnabled = false
+            signingConfig = signingConfigs.getByName("release")
+        }
     }
 
     buildFeatures { compose = true }
