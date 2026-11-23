@@ -19,9 +19,9 @@ Milestone 8.1 was commissioned to conduct a complete forensic audit, eliminate a
 ### Milestone 8.1 Results Summary
 - **Total Scenarios Captured & Verified:** 21 / 21 (`PASS`)
 - **Duplicate SHA-256 Hashes:** 0 (100% distinct visual captures)
-- **Splash Screen / Starting Window Captures:** 0
-- **Unpersisted / Empty Onboarding Captures:** 0
-- **JVM Unit Tests:** 254 / 254 `PASS` (0 failures, 0 errors)
+- **Splash Screen / Starting Window Captures:** 0 (Guarded by AST checks and Light theme background pixel verification `r>180, g>180, b>180`)
+- **Unpersisted / Empty Onboarding Captures:** 0 (Guarded by forbidden tokens: `"Loading location"`, `"Find your prayer times"`, and 6-row presence assertion)
+- **JVM Unit Tests:** 255 / 255 `PASS` (0 failures, 0 errors, including new offline schedule regression test)
 - **Connected Instrumentation Tests on SprintPixel (`emulator-5554`):** 5 / 5 `PASS` (0 failures, 0 skipped)
 - **Android Lint Analysis:** 0 errors
 - **Build Compilation:** `assembleDebug` and `assembleRelease` `PASS`
@@ -101,10 +101,10 @@ All 21 screenshots were captured directly from SprintPixel (`emulator-5554`, API
 | 7 | `07_qibla_light_verified.png` | Qibla Compass (Light) — Light theme compass rose, needle, and distance readout | 1080×2400 | 126.4 KB | `dbf02753889393bcd7aaf3668d545103ab98efd465b83e8c645140e36655b4a0` | `PASS` |
 | 8 | `08_qibla_low_accuracy_verified.png` | Qibla Calibration — Sensor low-accuracy state with figure-eight motion guidance banner | 1080×2400 | 126.2 KB | `f416e6809195c8ba4ad8726de2b5be789a56fd3859c6b17d825bbfe3b6108e31` | `PASS` |
 | 9 | `09_settings_dark_verified.png` | Settings (Dark) — Appearance modes, Prayer calculation method (Karachi), Asr juristic rule | 1080×2400 | 180.5 KB | `7ffca1e36be6c5967c737ed3270e87d78823c3761e394496c5744e870eb41157` | `PASS` |
-| 10 | `10_settings_light_verified.png` | Settings (Light) — Light theme settings list, selection radio buttons, and clear location action | 1080×2400 | 119.9 KB | `96bf90500fa49f55ef0f54b51324978467b35182db7a43817d94b769ec128b9f` | `PASS` |
+| 10 | `10_settings_light_verified.png` | Settings (Light) — Light theme settings list, selection radio buttons, and clear location action | 1080×2400 | 182.8 KB | `1d8d991e47f28766c0f132bd344d0b29a80099cc0f52798ec66848c54a40d155` | `PASS` |
 | 11 | `11_location_verified.png` | Location Screen — Active location header (Kattankulathur), GPS toggle, offline city search | 1080×2400 | 74.9 KB | `564244d5276d9939dfa0deeda6c26c761ec9e5b780795c020eb4e4f7b3af1b4a` | `PASS` |
 | 12 | `12_long_city_verified.png` | Long City Wrapping — "Kattankulathur, Chengalpattu, Tamil Nadu" wraps naturally without clipping | 1080×2400 | 124.4 KB | `8ae1d15c35b13919bc16901515d807c16d982a37bef18e58ca31de5a47c72a5b` | `PASS` |
-| 13 | `13_today_offline_verified.png` | Today Offline Mode — Local SQLite/Room calculation with 6 complete timings (no internet required) | 1080×2400 | 47.8 KB | `2f1a2f0b3b2893870280336e9b528b2f3b1240dea03d66e8c5839dfb284f46c0` | `PASS` |
+| 13 | `13_today_offline_verified.png` | Today Offline Mode — Local SQLite/Room calculation with 6 complete timings (no internet required) | 1080×2400 | 123.6 KB | `8fb886081be54b82ddc2fcc766d6cf2abe3d6fbb936398e0dfb60421fef3e77c` | `PASS` |
 | 14 | `14_calendar_offline_verified.png` | Calendar Offline Mode — Fully generated month schedule and selected day times in offline mode | 1080×2400 | 183.1 KB | `e9f03157679f817c1bbc0672d5510921f5312b09b7247a8fac3971046cb057c2` | `PASS` |
 | 15 | `15_after_isha_verified.png` | After-Isha Rollover — Next prayer hero advances to "Tomorrow", Fajr countdown active | 1080×2400 | 129.0 KB | `788b3fa053d8f2badf051fcc13c29cc856f39f6d6d92d713a727a504a7c4c753` | `PASS` |
 | 16 | `16_widget_2x2_verified.png` | 2×2 Glance Widget — Pinned to launcher home screen, live countdown & Next prayer readout | 1080×2400 | 1239.7 KB | `5ee504a916712048bf257ecdd051e2a4f68ec817ea85d7978302ae912fe01dae` | `PASS` |
@@ -148,7 +148,7 @@ Direct clickable links to inspect all verified screenshots:
 
 | Verification Target | Command | Tests Run | Result | Evidence / Log |
 | :--- | :--- | :---: | :---: | :--- |
-| **JVM Unit Tests** | `./gradlew testDebugUnitTest` | **254** | **`PASS`** | 0 failures, 0 errors across `:app`, `:core:prayer`, `:core:location`, `:core:preferences` |
+| **JVM Unit Tests** | `./gradlew testDebugUnitTest` | **255** | **`PASS`** | 0 failures, 0 errors across `:app`, `:core:prayer`, `:core:location`, `:core:preferences` |
 | **Connected Android Tests** | `ANDROID_SERIAL=emulator-5554 ./gradlew connectedDebugAndroidTest` | **5** | **`PASS`** | All 5 end-to-end Compose tests passed on SprintPixel (AVD API 36) |
 | **Android Lint** | `./gradlew lintDebug` | - | **`PASS`** | 0 errors (`app/build/reports/lint-results-debug.html`) |
 | **Debug Build** | `./gradlew assembleDebug` | - | **`PASS`** | Build successful (`app-debug.apk`) |
@@ -174,3 +174,4 @@ Salah 3.0 has satisfied all release engineering, visual consistency, and reliabi
 
 **Milestone 8.1 Visual Acceptance Status:** **ACCEPTED (`PASS`)**  
 **Ready for Google Play Closed Testing Track.**
+

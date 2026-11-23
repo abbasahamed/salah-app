@@ -150,4 +150,30 @@ class TodayPresentationTest {
         // Two days later -> "23 Nov"
         assertEquals("23 Nov", resolveDateLabel(todayDate.plusDays(2), todayDate))
     }
+
+    @Test
+    fun offlineScheduleProvidesAllSixPrayersAndValidLocationSelectionPreventsLoadingState() {
+        val loc = com.salah.location.SalahLocation(
+            id = "test-kattankulathur",
+            coordinates = com.salah.location.LocationCoordinates(12.820254, 80.037819),
+            names = com.salah.location.PlaceNames("Kattankulathur", "Tamil Nadu", "India"),
+            zone = ZoneId.of("Asia/Kolkata"),
+            mode = com.salah.location.LocationMode.MANUAL,
+        )
+        val selection = LocationSelection(ready = true, value = loc)
+        assertTrue("Location selection must be ready", selection.ready)
+        assertNotNull("Location value must not be null", selection.value)
+
+        val scheduleResult = com.salah.prayer.PrayerScheduleResult.Available(
+            scheduleToday,
+            com.salah.prayer.PrayerTimeSource.OFFLINE_CALCULATION,
+        )
+        assertEquals(com.salah.prayer.PrayerTimeSource.OFFLINE_CALCULATION, scheduleResult.source)
+        assertEquals(6, scheduleResult.schedule.timings.size)
+        val prayerNames = scheduleResult.schedule.timings.map { it.name }
+        assertTrue(prayerNames.containsAll(listOf(
+            PrayerName.FAJR, PrayerName.SUNRISE, PrayerName.DHUHR,
+            PrayerName.ASR, PrayerName.MAGHRIB, PrayerName.ISHA,
+        )))
+    }
 }

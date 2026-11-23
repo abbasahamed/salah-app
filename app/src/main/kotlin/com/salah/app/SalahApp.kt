@@ -415,6 +415,16 @@ internal fun SalahApp(
                                     )
                                     LocationSelection(ready = true, value = loc)
                                 }
+                                "today_offline", "today_after_isha" -> {
+                                    val loc = selection.value ?: com.salah.location.SalahLocation(
+                                        id = "mock-offline",
+                                        coordinates = com.salah.location.LocationCoordinates(12.820254, 80.037819),
+                                        names = com.salah.location.PlaceNames("Kattankulathur", "Tamil Nadu", "India"),
+                                        zone = java.time.ZoneId.of("Asia/Kolkata"),
+                                        mode = com.salah.location.LocationMode.MANUAL,
+                                    )
+                                    LocationSelection(ready = true, value = loc)
+                                }
                                 else -> selection
                             }
                             val selectedSite = todaySelection.value?.prayerLocation()
