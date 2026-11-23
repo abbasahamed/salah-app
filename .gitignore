@@ -59,3 +59,4 @@ logcat*.txt
 # Temporary test screenshots and checkpoints
 test_screen*.png
 checkpoints/
+*.zip
