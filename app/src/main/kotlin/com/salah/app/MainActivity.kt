@@ -29,8 +29,8 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val scenario = intent.getStringExtra("scenario")
-        val themeOverride = intent.getStringExtra("theme")
+        val scenario = com.salah.app.scenario.ScenarioProvider.getScenario(intent)
+        val themeOverride = com.salah.app.scenario.ScenarioProvider.getThemeOverride(intent)
         handlePinWidget(intent)
         enableEdgeToEdge()
         setContent {
